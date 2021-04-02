@@ -2,6 +2,7 @@ package com.up.cleanarchitecture.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.up.cleanarchitecture.Others.Constants
 import com.up.cleanarchitecture.data.remote.CharacterApi
 import dagger.Module
 import dagger.Provides
@@ -27,7 +28,7 @@ object RetrofitModule {
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit.Builder{
         return Retrofit.Builder()
-            .baseUrl("https://rickandmortyapi.com/api/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
     }
 
