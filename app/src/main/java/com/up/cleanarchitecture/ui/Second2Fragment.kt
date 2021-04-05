@@ -28,8 +28,8 @@ class Second2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val name = arguments?.getString("name")
         val species = arguments?.getString("species")
-        var gender = arguments?.getString("gender")
-        var status = arguments?.getString("status")
+        val gender = arguments?.getString("gender")
+        val status = arguments?.getString("status")
 
         name1.text = "Name: $name"
         status1.text = "Status: $status"
