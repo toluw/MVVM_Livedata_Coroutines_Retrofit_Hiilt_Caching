@@ -5,25 +5,31 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.runner.AndroidJUnitRunner
 import com.up.cleanarchitecture.data.model.Results
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
-@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
 class CharacterDaoTest {
-    private lateinit var database: CharacterDatabase
-    private lateinit var dao: CharacterDao
+
+    @Inject
+    @Named("test_db")
+    lateinit var database: CharacterDatabase
+    lateinit var dao: CharacterDao
+
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
     @Before
     fun setup(){
-      database = Room.inMemoryDatabaseBuilder(
-              ApplicationProvider.getApplicationContext(),
-               CharacterDatabase::class.java)
-              .allowMainThreadQueries()
-              .build()
-
+        hiltRule.inject()
         dao = database.characterDao()
     }
 
